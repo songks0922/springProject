@@ -10,8 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.zerock.guestbook.dto.GuestbookDTO;
+import org.zerock.guestbook.dto.PageRequestDTO;
+import org.zerock.guestbook.dto.PageResultDTO;
 import org.zerock.guestbook.entity.Guestbook;
 import org.zerock.guestbook.entity.QGuestbook;
+import org.zerock.guestbook.service.GuestbookServiceImpl;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -23,6 +27,9 @@ class GuestbookRepositoryTests {
 
     @Autowired
     private GuestbookRepository guestbookRepository;
+
+    @Autowired
+    private GuestbookServiceImpl service;
 
     @Test
     @DisplayName("더미 테스트")
@@ -99,6 +106,19 @@ class GuestbookRepositoryTests {
         result.stream().forEach(guestbook -> {
             System.out.println(guestbook);
         });
+    }
+
+    @Test
+    @DisplayName("엔티티 객체 -> DTO 객체 변환 테스트")
+    public void testList() {
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1)
+                .size(10).build();
+        PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
+
+        for (GuestbookDTO guestbookDTO : resultDTO.getDtoList()) {
+            System.out.println(guestbookDTO);
+        }
     }
 
 }
