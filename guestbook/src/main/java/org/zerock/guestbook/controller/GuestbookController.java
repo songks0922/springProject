@@ -26,6 +26,7 @@ public class GuestbookController {
     public String index() {
         return "redirect:/guestbook/list";
     }
+
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
 

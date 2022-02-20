@@ -93,7 +93,7 @@ class GuestbookRepositoryTests {
         BooleanBuilder builder = new BooleanBuilder();
 
         BooleanExpression exTitle = qGuestbook.title.contains(keyword);
-        BooleanExpression exContent = qGuestbook.title.contains(keyword);
+        BooleanExpression exContent = qGuestbook.content.contains(keyword);
 
         BooleanExpression exAll = exTitle.or(exContent);
 
