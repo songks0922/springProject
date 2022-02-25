@@ -11,6 +11,9 @@
 
 			<!--페이지 번호  -->
 			<input type="hidden" name="page" th:value="${requestDTO.page}">
+			<input type="hidden" name="type" th:value="${requestDTO.type}" >
+			<input type="hidden" name="keyword" th:value="${requestDTO.keyword}" >
+
 
 			<div class="form-group">
 				<label >Gno</label>
@@ -84,6 +87,7 @@
 				actionForm.append(page);
 				actionForm.append(type);
 				actionForm.append(keyword);
+
 
 				actionForm
 						.attr("action", "/guestbook/list")
