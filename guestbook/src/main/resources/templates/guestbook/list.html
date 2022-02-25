@@ -14,6 +14,7 @@
             </span>
 		</h1>
 
+
 		<form action="/guestbook/list" method="get" id="searchForm">
 			<div class="input-group">
 				<input type="hidden" name="page" value = "1">
@@ -35,26 +36,35 @@
 			</div>
 		</form>
 
+
+
 		<table class="table table-striped">
-			<tread>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Gno</th>
-					<th scope="col">Title</th>
-					<th scope="col">Regdate</th>
-				</tr>
-			</tread>
+			<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Writer</th>
+				<th scope="col">Regdate</th>
+			</tr>
+			</thead>
 			<tbody>
+
 			<tr th:each="dto : ${result.dtoList}" >
 				<th scope="row">
 					<a th:href="@{/guestbook/read(gno = ${dto.gno},
-                    page= ${result.page})}">[[${dto.gno}]]
+                    page= ${result.page},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword})}">
+						[[${dto.gno}]]
 					</a>
 				</th>
 				<td>[[${dto.title}]]</td>
 				<td>[[${dto.writer}]]</td>
 				<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
 			</tr>
+
+
+
 			</tbody>
 		</table>
 
@@ -81,6 +91,7 @@
 			</li>
 
 		</ul>
+
 
 		<div class="modal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
@@ -127,6 +138,8 @@
 
 
 		</script>
+
+
 
 	</th:block>
 
